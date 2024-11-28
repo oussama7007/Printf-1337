@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_puthex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oait-si- <oait-si-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 00:10:36 by oait-si-          #+#    #+#             */
-/*   Updated: 2024/11/25 02:47:53 by oait-si-         ###   ########.fr       */
+/*   Created: 2024/11/24 22:54:33 by oait-si-          #+#    #+#             */
+/*   Updated: 2024/11/26 05:50:25 by oait-si-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putstr(const char *str, int *count)
+void	ft_puthex(size_t n, int *count)
 {
-	int	i;
-
-	if (!str)
-		*count += write(1, "(null)", 6);
-	else
+	if (n >= 16)
 	{
-		i = 0;
-		while (str[i])
-			ft_putchar(str[i++], count);
+		ft_puthex(n / 16, count);
+		ft_puthex(n % 16, count);
 	}
+	else if (n < 10)
+		ft_putchar(n + 48, count);
+	else
+		ft_putchar(n + 87, count);
 }
